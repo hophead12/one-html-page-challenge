@@ -1,0 +1,31 @@
+name: Deploy html page
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  checkout:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Check dir
+      run: ls -la
+     
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Install apache2
+      run: apt install apache2 -y
+      
+    - name: deploy files
+      run: mv * /var/www/html
+      
+    - name: restart apache
+      run: systemctl restart apache2
+
+      
