@@ -10,11 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+    - uses: actions/checkout@v3
+    
     - name: Install Apache2
       run: sudo apt install apache2 -y
       
     - name: Copy files to /var/www/html
-      run: rsync -avz --delete . /var/www/html/
+      run: sudo cp -r * /var/www/html/
       
     - name: Check Apache2 status
       run: sudo systemctl status apache2 || sudo systemctl start apache2
