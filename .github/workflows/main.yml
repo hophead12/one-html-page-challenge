@@ -20,7 +20,7 @@ jobs:
     
     steps:
     - name: Install apache2
-      run: apt install apache2 -y
+      run: sudo apt install apache2 -y
       
     - name: deploy files
       run: mv * /var/www/html
