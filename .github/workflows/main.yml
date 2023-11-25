@@ -25,3 +25,5 @@ jobs:
       run: |
         sudo systemctl restart apache2
         sleep 2
+    - name: Test
+      run: curl localhost
