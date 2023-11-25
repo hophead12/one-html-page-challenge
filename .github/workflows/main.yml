@@ -1,31 +1,25 @@
-name: Deploy html page
+name: Deploy HTML Page
 
 on:
   push:
     branches:
       - master
+
 jobs:
-  checkout:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v3
-
-    - name: Check dir
-      run: ls -la
-     
   deploy:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Install apache2
+    - name: Install Apache2
       run: sudo apt install apache2 -y
       
-    - name: deploy files
-      run: mv * /var/www/html
+    - name: Copy files to /var/www/html
+      run: rsync -avz --delete . /var/www/html/
       
-    - name: restart apache
-      run: systemctl restart apache2
-
+    - name: Check Apache2 status
+      run: sudo systemctl status apache2 || sudo systemctl start apache2
       
+    - name: Restart Apache2
+      run: |
+        sudo systemctl restart apache2
+        sleep 2
