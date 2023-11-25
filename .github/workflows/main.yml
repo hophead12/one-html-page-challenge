@@ -3,7 +3,7 @@ name: Deploy html page
 on:
   push:
     branches:
-      - main
+      - master
 jobs:
   checkout:
     runs-on: ubuntu-latest
